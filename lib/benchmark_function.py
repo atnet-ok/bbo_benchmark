@@ -14,6 +14,7 @@ class BecnmarkFunction(metaclass=ABCMeta):
     @abstractmethod
     def get_params_range(self)->List[Tuple[float]]:
         pass
+
 class QuadraticFunction(BecnmarkFunction):
     def __init__(self,dim=10,scale = 10):
         self._dim = dim
@@ -31,8 +32,7 @@ class QuadraticFunction(BecnmarkFunction):
     def get_params_range(self):
         range_s = [self._range for i in range(self._dim)]
         return range_s
-model = QuadraticFunction()
-str(type(model)).replace('__main__.','').replace('<class ','').replace('>','')
+
 class AckleyFunction(BecnmarkFunction):
     def __init__(self,dim=10,scale = 30):
         self._dim = dim
