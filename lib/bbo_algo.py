@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import optuna
 import math
+import numba
 from scipy.optimize import minimize
 from scipy.optimize import Bounds 
 from abc import ABCMeta,abstractmethod
@@ -52,7 +53,7 @@ class BBO(metaclass=ABCMeta):
 
 class GeneticAlgorithm(BBO):
     def __init__(self,
-                    chrom_num = 200,
+                    chrom_num = 30,
                     parent_rate = 0.5,
                     crossover_rate = 0.6,
                     crossover_method = 'two-point',
@@ -137,6 +138,10 @@ class GeneticAlgorithm(BBO):
                                             )
             self._eval_history.append(chrom_best['eval'].values[0])
             self._params_history.append(chrom_best['params'].values[0])
+
+            # self._eval_history += list(chrom_s['eval'].values)
+            # self._params_history += list(chrom_s['params'].values)
+
             #print(chrom_best)
 
             # self.show_log(i,
