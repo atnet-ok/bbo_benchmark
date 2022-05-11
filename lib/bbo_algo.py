@@ -50,9 +50,6 @@ class BBO(metaclass=ABCMeta):
                                                 )
         )
 
-
-
-
 class GeneticAlgorithm(BBO):
     def __init__(self,
                     chrom_num = 200,
@@ -142,10 +139,10 @@ class GeneticAlgorithm(BBO):
             self._params_history.append(chrom_best['params'].values[0])
             #print(chrom_best)
 
-            self.show_log(i,
-                          chrom_best['eval'].values[0],
-                          np.mean(chrom_best['params'].values[0])
-                        )
+            # self.show_log(i,
+            #               chrom_best['eval'].values[0],
+            #               np.mean(chrom_best['params'].values[0])
+            #             )
                 
 
         return chrom_best['eval'].values[0], chrom_best['params'].values[0]
@@ -251,6 +248,7 @@ class GeneticAlgorithm(BBO):
 
 class GridSearch(BBO):
     def __init__(self):
+        optuna.logging.disable_default_handler()
         self._study = []
 
     def optimization(self,model,max_iter):
@@ -283,6 +281,7 @@ class GridSearch(BBO):
 class OptunaAlgo(BBO):
     def __init__(self,sampler):
         self._eval_history =[]
+        optuna.logging.disable_default_handler()
         study = optuna.create_study(sampler=sampler)
         self._study = study
 
