@@ -1,7 +1,5 @@
 import numpy as np
-import numpy as np
 import pandas as pd
-import sys
 import optuna
 import math
 from scipy.optimize import minimize
@@ -41,9 +39,9 @@ class BBO(metaclass=ABCMeta):
             Tuple[List[any],List[List]]: history of best value and parameters
         """
 
-    @abstractmethod
-    def get_calc_time(self)->float:
-        pass
+    # @abstractmethod
+    # def get_calc_time(self)->float:
+    #     pass
 
     def show_log(self,step,fval,params):
         print('trial:{}, fval:{}, params:{}'.format(step,
@@ -150,7 +148,7 @@ class GeneticAlgorithm(BBO):
                         )
                 
 
-        return chrom_best['eval'], chrom_best['params']
+        return chrom_best['eval'].values[0], chrom_best['params'].values[0]
 
     def _evaliation(self,chrom_s,model):
         
